@@ -358,6 +358,12 @@ func (self Otto) Set(name string, value interface{}) error {
 	}
 }
 
+func (self Otto) Delete(name string) error {
+	return catchPanic(func() {
+		self.runtime.globalStash.deleteBinding(name)
+	})
+}
+
 func (self Otto) setValue(name string, value Value) {
 	self.runtime.globalStash.setValue(name, value, false)
 }
